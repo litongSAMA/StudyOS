@@ -1,0 +1,43 @@
+# StudyOS .editorconfig
+# 编辑器统一约定：避免 CRLF/LF 混用、BOM、缩进不一致造成的"改一行、整文件 diff"。
+# 主要编辑器（VS Code / JetBrains / Sublime / Vim）都原生支持 EditorConfig。
+
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+indent_style = space
+indent_size = 2
+
+# ---------- Python：4 空格缩进 ----------
+[*.py]
+indent_size = 4
+max_line_length = 120
+
+# ---------- 前端 / 脚本 ----------
+[*.{ts,tsx,js,jsx,json,css,html,vue}]
+indent_size = 2
+
+[*.{yml,yaml}]
+indent_size = 2
+
+# ---------- Windows 批处理：必须 CRLF，否则部分 cmd 版本会解析异常 ----------
+[*.{bat,cmd}]
+end_of_line = crlf
+indent_size = 2
+
+# ---------- 文档：中文文档普遍手工对齐，别自动去掉行尾空格 ----------
+[*.{md,txt}]
+trim_trailing_whitespace = false
+
+# ---------- 构建产物与归档：不要做任何规范化 ----------
+[*.zip]
+insert_final_newline = false
+charset = unset
+end_of_line = unset
+
+[*.lock]
+insert_final_newline = false

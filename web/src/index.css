@@ -1,0 +1,358 @@
+@import "tailwindcss";
+
+@theme {
+  --color-brand-50: #eef2ff;
+  --color-brand-100: #e0e7ff;
+  --color-brand-500: #6366f1;
+  --color-brand-600: #4f46e5;
+  --color-brand-700: #4338ca;
+}
+
+html {
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei",
+    "Segoe UI", Roboto, sans-serif;
+}
+
+body {
+  background: #f4f5f9;
+  color: #1e293b;
+}
+
+/* 高亮检索摘录 */
+mark-hit {
+  background: #fde68a;
+  border-radius: 2px;
+  padding: 0 1px;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+
+/* ===== 动态壁纸 =====
+   WallpaperLayer 固定在视口最底层（z-0），主内容/侧边栏在其上方半透明展示。
+   全部由 CSS 动画实现：零外部资源、离线可用、低功耗（GPU 合成 transform/opacity）。 */
+.wallpaper-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.wpblob {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(70px);
+  will-change: transform, opacity;
+}
+
+@keyframes wp-drift {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(6vmax, 4vmax, 0) scale(1.12);
+  }
+  100% {
+    transform: translate3d(-4vmax, 6vmax, 0) scale(0.94);
+  }
+}
+
+/* 极光：浅色底 + 四团柔光缓缓漂移 */
+.wp-aurora {
+  background: linear-gradient(135deg, #eef2ff 0%, #fdf2f8 55%, #ecfeff 100%);
+}
+.wp-aurora-blob {
+  opacity: 0.5;
+}
+.wp-aurora-blob-0 {
+  width: 55vmax;
+  height: 55vmax;
+  left: -12vmax;
+  top: -14vmax;
+  background: radial-gradient(circle at 30% 30%, #a5b4fc, transparent 60%);
+  animation: wp-drift 26s ease-in-out infinite alternate;
+}
+.wp-aurora-blob-1 {
+  width: 48vmax;
+  height: 48vmax;
+  right: -10vmax;
+  top: 6vmax;
+  background: radial-gradient(circle at 60% 40%, #f9a8d4, transparent 62%);
+  animation: wp-drift 32s ease-in-out infinite alternate-reverse;
+}
+.wp-aurora-blob-2 {
+  width: 50vmax;
+  height: 50vmax;
+  left: 30%;
+  bottom: -16vmax;
+  background: radial-gradient(circle at 50% 50%, #a5f3fc, transparent 60%);
+  animation: wp-drift 38s ease-in-out infinite alternate;
+}
+.wp-aurora-blob-3 {
+  width: 40vmax;
+  height: 40vmax;
+  right: 18%;
+  bottom: 4vmax;
+  background: radial-gradient(circle at 50% 50%, #ddd6fe, transparent 62%);
+  animation: wp-drift 29s ease-in-out infinite alternate-reverse;
+}
+
+/* 流光：三色渐变背景缓慢流动 */
+.wp-gradient {
+  background: linear-gradient(120deg, #e0e7ff, #fbcfe8, #cffafe, #e0e7ff);
+  background-size: 300% 300%;
+  animation: wp-gradient-flow 18s ease infinite;
+}
+@keyframes wp-gradient-flow {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* 星云：柔光光晕缓慢旋转 + 呼吸 */
+.wp-nebula {
+  background: linear-gradient(150deg, #f5f3ff 0%, #f0f9ff 100%);
+}
+.wp-nebula-blob {
+  opacity: 0.5;
+}
+.wp-nebula-blob-0 {
+  width: 60vmax;
+  height: 60vmax;
+  left: -18vmax;
+  top: -20vmax;
+  background: radial-gradient(circle at 40% 40%, #c7d2fe, transparent 62%);
+  animation: wp-spin 60s linear infinite;
+}
+.wp-nebula-blob-1 {
+  width: 52vmax;
+  height: 52vmax;
+  right: -16vmax;
+  bottom: -18vmax;
+  background: radial-gradient(circle at 60% 60%, #fde68a, transparent 60%);
+  animation: wp-spin-rev 70s linear infinite;
+}
+.wp-nebula-blob-2 {
+  width: 40vmax;
+  height: 40vmax;
+  left: 40%;
+  top: 28%;
+  background: radial-gradient(circle at 50% 50%, #a5f3fc, transparent 58%);
+  animation: wp-breathe 14s ease-in-out infinite;
+}
+@keyframes wp-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes wp-spin-rev {
+  to {
+    transform: rotate(-360deg);
+  }
+}
+@keyframes wp-breathe {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.4;
+  }
+  50% {
+    transform: scale(1.15);
+    opacity: 0.6;
+  }
+}
+
+/* 晨雾：轻柔雾团缓缓横向飘动 */
+.wp-mist {
+  background: linear-gradient(180deg, #eef6fb 0%, #f8fafc 100%);
+}
+.wp-mist-blob {
+  opacity: 0.6;
+}
+.wp-mist-blob-0 {
+  width: 46vmax;
+  height: 26vmax;
+  left: -8vmax;
+  top: 12%;
+  background: radial-gradient(ellipse at center, #ffffff, transparent 65%);
+  animation: wp-mist 30s ease-in-out infinite alternate;
+}
+.wp-mist-blob-1 {
+  width: 40vmax;
+  height: 24vmax;
+  right: -10vmax;
+  top: 40%;
+  background: radial-gradient(ellipse at center, #e0f2fe, transparent 65%);
+  animation: wp-mist 38s ease-in-out infinite alternate-reverse;
+}
+.wp-mist-blob-2 {
+  width: 44vmax;
+  height: 26vmax;
+  left: 20%;
+  bottom: -8vmax;
+  background: radial-gradient(ellipse at center, #f1f5f9, transparent 66%);
+  animation: wp-mist 34s ease-in-out infinite alternate;
+}
+@keyframes wp-mist {
+  0% {
+    transform: translateX(-4vmax);
+  }
+  100% {
+    transform: translateX(5vmax);
+  }
+}
+
+/* 粒子：细微圆点从底部缓缓上浮 */
+.wp-particles {
+  background: linear-gradient(180deg, #f8fafc 0%, #eef2ff 100%);
+}
+.wp-particle {
+  position: absolute;
+  bottom: 0;
+  border-radius: 9999px;
+  opacity: 0;
+  animation-name: wp-float;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+@keyframes wp-float {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 0;
+  }
+  8% {
+    opacity: 0.55;
+  }
+  90% {
+    opacity: 0.45;
+  }
+  100% {
+    transform: translateY(-108vh) scale(1.25);
+    opacity: 0;
+  }
+}
+
+/* 自定义图片壁纸：铺满全屏 + 可选 Ken Burns 缓慢缩放平移动效 */
+.wp-custom {
+  background: #eef2ff;
+}
+.wp-custom-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  will-change: transform;
+}
+.wp-custom-img-animated {
+  animation: wp-kenburns 42s ease-in-out infinite alternate;
+}
+@keyframes wp-kenburns {
+  0% {
+    transform: scale(1.02) translate3d(0, 0, 0);
+  }
+  100% {
+    transform: scale(1.14) translate3d(-1.8%, 1.2%, 0);
+  }
+}
+
+/* 无障碍：用户系统开启「减弱动态效果」时关闭壁纸动画 */
+@media (prefers-reduced-motion: reduce) {
+  .wallpaper-layer,
+  .wallpaper-layer * {
+    animation: none !important;
+  }
+}
+
+/* ===== 登录 / 注册页动效 ===== */
+
+/* 卡片入场：上浮 + 淡入 + 轻微缩放 */
+@keyframes auth-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+.auth-enter {
+  animation: auth-fade-up 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.auth-enter-delay-1 {
+  animation: auth-fade-up 0.45s cubic-bezier(0.22, 1, 0.36, 1) 0.08s both;
+}
+.auth-enter-delay-2 {
+  animation: auth-fade-up 0.45s cubic-bezier(0.22, 1, 0.36, 1) 0.16s both;
+}
+
+/* 登录失败：表单抖动提示 */
+@keyframes auth-shake {
+  10%,
+  90% {
+    transform: translateX(-1px);
+  }
+  20%,
+  80% {
+    transform: translateX(2px);
+  }
+  30%,
+  50%,
+  70% {
+    transform: translateX(-3px);
+  }
+  40%,
+  60% {
+    transform: translateX(3px);
+  }
+}
+.auth-shake {
+  animation: auth-shake 0.5s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}
+
+/* 品牌图标：轻盈浮动 */
+@keyframes auth-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+.auth-float {
+  animation: auth-float 5s ease-in-out infinite;
+}
+
+/* 登录页输入框内图标占位（避免布局抖动） */
+.auth-input-icon {
+  position: absolute;
+  left: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .auth-enter,
+  .auth-enter-delay-1,
+  .auth-enter-delay-2,
+  .auth-shake,
+  .auth-float {
+    animation: none !important;
+  }
+}

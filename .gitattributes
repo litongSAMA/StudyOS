@@ -1,2 +1,45 @@
-# Auto detect text files and perform LF normalization
-* text=auto
+# StudyOS .gitattributes
+# 统一换行、标注二进制与生成物，避免跨平台协作时的"整文件改动"与错误的文本 diff/合并。
+
+# 默认：文本文件统一以 LF 入库（检出时是否转 CRLF 由各人 core.autocrlf 决定）
+* text=auto eol=lf
+
+# ---------- 必须在 Windows 上以 CRLF 检出 ----------
+*.bat text eol=crlf
+*.cmd text eol=crlf
+
+# ---------- 二进制：禁止任何换行转换与文本合并 ----------
+*.zip    binary
+*.png    binary
+*.jpg    binary
+*.jpeg   binary
+*.gif    binary
+*.ico    binary
+*.pdf    binary
+*.docx   binary
+*.pptx   binary
+*.xlsx   binary
+*.db     binary
+*.exe    binary
+*.dll    binary
+*.pyd    binary
+*.so     binary
+*.woff   binary
+*.woff2  binary
+
+# ---------- 生成物：折叠进 diff 摘要，评审看重点 ----------
+web/dist/**      linguist-generated=true -diff
+mobile/dist/**   linguist-generated=true -diff
+package-lock.json linguist-generated=true -diff
+requirements.lock linguist-generated=true -diff
+*.tsbuildinfo    linguist-generated=true -diff
+
+# ---------- 语言识别补充 ----------
+*.md     text
+*.sh     text eol=lf
+*.py     text
+Dockerfile text
+
+# ---------- 语言统计：不把文档与前端产物算进"代码语言" ----------
+docs/**  linguist-documentation
+release/** linguist-vendored
