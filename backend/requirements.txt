@@ -1,0 +1,25 @@
+# 直接依赖（锁定精确版本，保证团队/换机/答辩环境可复现）
+# 完整传递依赖锁定见 requirements.lock（python -m pip freeze 生成）
+# 精确复现：python -m pip install -r requirements.lock
+fastapi==0.141.1
+uvicorn[standard]==0.52.4
+sqlalchemy==2.0.52
+pydantic==2.13.5
+httpx==0.28.1
+python-multipart==0.0.32
+ics==0.7.3
+# Web Push（Service Worker push 订阅，页面关闭也能收到提醒）
+pywebpush==2.5.0
+cryptography==50.0.1
+pymupdf==1.28.2
+python-pptx==1.0.2
+python-docx==1.2.0
+jieba==0.42.1
+# 课表导入：解析教务系统导出的二维课表（.csv 用标准库，无需依赖）
+openpyxl==3.1.5
+# 老式 .xls（BIFF8/OLE2，教务系统常见导出格式）；只读 xls，不涉及 xlsx
+xlrd==2.0.1
+# OCR（可选，截图入库/课表拍照识别用；安装失败不影响其他功能）
+rapidocr-onnxruntime==1.2.3
+# 图片 header 尺寸校验（防解压炸弹；rapidocr 亦依赖，此处显式声明直接依赖）
+pillow==12.3.0

@@ -1,0 +1,83 @@
+# ============================================================================
+#  StudyOS .gitignore
+#  原则：源码树只放源码与交付必需的预构建产物；构建产物、运行时数据、缓存、
+#        本地环境、机密配置一律不进版本库。
+#  ★ 特殊说明：web/dist 与 mobile/dist 是【交付必需的预构建产物】，不是可以随手
+#    删掉的构建垃圾 —— 后端 backend/app/main.py 直接托管 web/dist，评审不装
+#    Node.js 也能跑界面。详见 README「目录结构」与 docs/打包说明.md。它们被
+#    显式保护在本文件末尾。
+# ============================================================================
+
+# ---------- Python ----------
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# 虚拟环境（含本仓库内用于验证的 backend/.venv，内含 Python 运行时，很大）
+.venv/
+venv/
+env/
+ENV/
+
+# 测试与工具缓存（pytest 的临时目录名形如 pytest-cache-files-xxxx / tmp-pytest）
+.pytest_cache/
+backend/tmp-pytest/
+backend/.testtmp/
+pytest-cache-files-*/
+.mypy_cache/
+.ruff_cache/
+.coverage
+.coverage.*
+htmlcov/
+build/
+*.egg-info/
+dist/
+!web/dist/
+!mobile/dist/
+
+# ---------- Node / 前端 ----------
+node_modules/
+.npm-cache/
+npm-debug.log*
+yarn-error.log*
+web/trace.log
+*.tsbuildinfo
+
+# ---------- 运行时数据与日志（本地数据、附件、私钥一律不交付）----------
+backend/data/
+logs/*
+!logs/.gitkeep
+
+# ---------- 交付产物（由 scripts/build-release.ps1 生成，不进源码树）----------
+# release/ 是产物区：归档本身、校验清单、以及【临时解压出来的目录】都不进版本库。
+# 解压目录用 release/*/ 整体忽略——否则把 zip 解开后，5500 个文件
+# （含 StudyOS.exe / *.dll / *.pyd）会被 git 当成源码跟踪，正是要避免的冗余。
+release/*.zip
+release/SHA256SUMS.txt
+release/*/
+*.zip.sha256
+
+# 面向评委的提交包：由 scripts/build-release.ps1 与提交打包流程生成，不进版本库
+/StudyOS-提交/
+
+# ---------- 本地环境与机密 ----------
+.env
+.env.*
+!.env.example
+
+# ---------- 编辑器 / 操作系统 ----------
+.DS_Store
+Thumbs.db
+desktop.ini
+.idea/
+.vscode/
+*.swp
+*~
+
+# ============================================================================
+#  显式保护：预构建产物必须随包交付，请勿删除、请勿忽略
+#  （放在最后，确保不被上面的 build/ dist/ 一类规则吃掉）
+# ============================================================================
+!web/dist/**
+!mobile/dist/**

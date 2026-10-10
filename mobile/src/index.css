@@ -1,0 +1,1061 @@
+@import "tailwindcss";
+
+@theme {
+  --color-brand-50: #eef2ff;
+  --color-brand-100: #e0e7ff;
+  --color-brand-500: #6366f1;
+  --color-brand-600: #4f46e5;
+  --color-brand-700: #4338ca;
+}
+
+html {
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei",
+    "Segoe UI", Roboto, sans-serif;
+}
+
+body {
+  background: #f4f5f9;
+  color: #1e293b;
+  min-width: 320px;
+}
+
+/* ===== StudyOS Mobile 应用框架 ===== */
+.mobile-app-shell {
+  min-height: 100dvh;
+  background:
+    radial-gradient(circle at 95% 8%, rgb(199 210 254 / 0.62), transparent 30%),
+    linear-gradient(180deg, rgb(248 250 252 / 0.55), rgb(245 247 252 / 0.92));
+}
+
+.mobile-header {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-height: calc(4.25rem + env(safe-area-inset-top));
+  padding: calc(0.625rem + env(safe-area-inset-top)) 1rem 0.625rem;
+  border-bottom: 1px solid rgb(226 232 240 / 0.72);
+  background: rgb(255 255 255 / 0.82);
+  box-shadow: 0 8px 30px rgb(51 65 85 / 0.05);
+  backdrop-filter: blur(22px) saturate(1.25);
+}
+
+.mobile-brand-mark {
+  display: flex;
+  width: 2.5rem;
+  height: 2.5rem;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.9rem;
+  color: white;
+  background: linear-gradient(145deg, #6366f1, #7c3aed);
+  box-shadow: 0 8px 20px rgb(99 102 241 / 0.28);
+}
+
+.mobile-main {
+  position: relative;
+  z-index: 10;
+  width: min(100%, 46rem);
+  min-height: calc(100dvh - 9rem);
+  margin: 0 auto;
+  padding: 1rem 1rem calc(6.25rem + env(safe-area-inset-bottom));
+}
+
+.mobile-offline-banner {
+  position: relative;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  border-bottom: 1px solid #fde68a;
+  background: rgb(255 251 235 / 0.92);
+  padding: 0.45rem 1rem;
+  color: #b45309;
+  font-size: 0.75rem;
+}
+
+.mobile-download-error-banner {
+  position: relative;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  border-bottom: 1px solid #fecaca;
+  background: rgb(254 242 242 / 0.95);
+  padding: 0.45rem 1rem;
+  color: #b91c1c;
+  font-size: 0.75rem;
+}
+
+.mobile-download-error-banner span {
+  min-width: 0;
+  flex: 1;
+  word-break: break-word;
+}
+
+.mobile-bottom-nav {
+  position: fixed;
+  z-index: 40;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  align-items: end;
+  min-height: calc(4.55rem + env(safe-area-inset-bottom));
+  padding: 0.35rem 0.45rem calc(0.35rem + env(safe-area-inset-bottom));
+  border-top: 1px solid rgb(226 232 240 / 0.76);
+  background: rgb(255 255 255 / 0.9);
+  box-shadow: 0 -10px 32px rgb(30 41 59 / 0.08);
+  backdrop-filter: blur(24px) saturate(1.35);
+}
+
+.mobile-tab {
+  display: flex;
+  min-width: 0;
+  min-height: 3.55rem;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.2rem;
+  border-radius: 1rem;
+  color: #94a3b8;
+  font-size: 0.68rem;
+  font-weight: 600;
+  transition: color 160ms ease, transform 160ms ease;
+}
+
+.mobile-tab-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mobile-tab.is-active {
+  color: #4f46e5;
+}
+
+.mobile-tab.is-prominent .mobile-tab-icon {
+  width: 2.8rem;
+  height: 2.8rem;
+  margin-top: -1.15rem;
+  border: 4px solid rgb(255 255 255 / 0.95);
+  border-radius: 1rem;
+  color: white;
+  background: linear-gradient(145deg, #6366f1, #7c3aed);
+  box-shadow: 0 8px 20px rgb(99 102 241 / 0.35);
+}
+
+.mobile-tab.is-prominent.is-active .mobile-tab-icon {
+  transform: translateY(-2px);
+}
+
+.mobile-sheet-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 70;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.mobile-sheet-backdrop {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  background: rgb(15 23 42 / 0.46);
+  backdrop-filter: blur(3px);
+}
+
+.mobile-sheet {
+  position: relative;
+  width: min(100%, 46rem);
+  max-height: min(86dvh, 46rem);
+  overflow-y: auto;
+  padding: 0.25rem 0 calc(1rem + env(safe-area-inset-bottom));
+  border-radius: 1.75rem 1.75rem 0 0;
+  background: white;
+  box-shadow: 0 -18px 55px rgb(15 23 42 / 0.18);
+  animation: mobile-sheet-in 220ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.mobile-sheet-handle {
+  width: 2.5rem;
+  height: 0.25rem;
+  margin: 0.5rem auto 0.75rem;
+  border-radius: 999px;
+  background: #cbd5e1;
+}
+
+.mobile-icon-button {
+  display: flex;
+  width: 2.5rem;
+  height: 2.5rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.8rem;
+  color: #64748b;
+  background: #f1f5f9;
+}
+
+.mobile-feature-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.65rem 0.45rem;
+}
+
+.mobile-feature-link {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  flex-direction: column;
+  gap: 0.45rem;
+  border-radius: 1rem;
+  padding: 0.65rem 0.2rem;
+  color: #475569;
+  font-size: 0.73rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+.mobile-feature-icon {
+  display: flex;
+  width: 2.75rem;
+  height: 2.75rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.9rem;
+  color: #5b5be8;
+  background: linear-gradient(145deg, #eef2ff, #f5f3ff);
+  box-shadow: inset 0 0 0 1px rgb(199 210 254 / 0.55);
+}
+
+@keyframes mobile-sheet-in {
+  from { transform: translateY(2rem); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+/* 首页的移动端焦点：状态总览 + 随手录入。 */
+.mobile-welcome-card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 8.5rem;
+  overflow: hidden;
+  padding: 1.35rem;
+  border-radius: 1.65rem;
+  background:
+    radial-gradient(circle at 82% 20%, rgb(255 255 255 / 0.26), transparent 24%),
+    linear-gradient(135deg, #4f46e5, #7c3aed 60%, #a855f7);
+  box-shadow: 0 18px 40px rgb(99 102 241 / 0.25);
+}
+
+.mobile-welcome-card::after {
+  content: "";
+  position: absolute;
+  right: -2rem;
+  bottom: -3.5rem;
+  width: 8rem;
+  height: 8rem;
+  border: 1px solid rgb(255 255 255 / 0.2);
+  border-radius: 999px;
+}
+
+.mobile-welcome-orb {
+  display: flex;
+  width: 4rem;
+  height: 4rem;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgb(255 255 255 / 0.25);
+  border-radius: 1.35rem;
+  color: white;
+  background: rgb(255 255 255 / 0.15);
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.2);
+  backdrop-filter: blur(12px);
+}
+
+.mobile-main > div > div > .rounded-2xl,
+.mobile-main > div > .rounded-2xl {
+  border-color: rgb(226 232 240 / 0.8);
+}
+
+@media (max-width: 767px) {
+  html { scroll-padding-top: calc(5rem + env(safe-area-inset-top)); }
+
+  input,
+  select,
+  textarea {
+    font-size: 16px !important;
+  }
+
+  .mobile-quick-row {
+    flex-direction: column;
+  }
+
+  .mobile-quick-row button {
+    min-height: 2.75rem;
+    justify-content: center;
+  }
+
+  .mobile-main .min-w-64,
+  .mobile-main .min-w-52,
+  .mobile-modal .min-w-64,
+  .mobile-modal .min-w-52 {
+    min-width: 100%;
+  }
+
+  .mobile-main .w-64,
+  .mobile-main .w-44,
+  .mobile-modal .w-64,
+  .mobile-modal .w-44 {
+    width: 100%;
+  }
+
+  .mobile-modal-layer {
+    align-items: flex-end;
+    padding: 0;
+  }
+
+  .mobile-modal {
+    max-width: none !important;
+    max-height: calc(92dvh - env(safe-area-inset-top));
+    border-radius: 1.5rem 1.5rem 0 0;
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  .mobile-modal-header {
+    padding: 1rem 1.1rem;
+  }
+
+  .mobile-modal-body {
+    padding: 1rem;
+  }
+
+  .mobile-onboarding-layer {
+    align-items: flex-end;
+    padding: 0;
+  }
+
+  .mobile-onboarding {
+    max-height: calc(94dvh - env(safe-area-inset-top));
+    border-radius: 1.5rem 1.5rem 0 0;
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  .mobile-onboarding > div {
+    padding-right: 1.15rem;
+    padding-left: 1.15rem;
+  }
+}
+
+@media (max-width: 420px) {
+  .mobile-main {
+    padding-right: 0.75rem;
+    padding-left: 0.75rem;
+  }
+
+  .mobile-feature-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .mobile-main .grid-cols-3,
+  .mobile-modal .grid-cols-3 {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (hover: none) {
+  .mobile-main .group .opacity-0 {
+    opacity: 1;
+  }
+}
+
+/* ===== 功能页窄屏优化 ===== */
+.mobile-page {
+  animation: mobile-page-in 180ms ease-out both;
+}
+
+.mobile-scroll-hint {
+  display: none;
+}
+
+@keyframes mobile-page-in {
+  from { opacity: 0; transform: translateY(0.25rem); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 767px) {
+  button,
+  a,
+  label,
+  select {
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+  }
+
+  .mobile-header {
+    min-height: calc(4rem + env(safe-area-inset-top));
+    padding-top: calc(0.5rem + env(safe-area-inset-top));
+    padding-bottom: 0.5rem;
+  }
+
+  .mobile-main {
+    padding-top: 0.8rem;
+  }
+
+  .mobile-tab {
+    font-size: 0.75rem;
+  }
+
+  .mobile-tab.is-active:not(.is-prominent) .mobile-tab-icon {
+    width: 2rem;
+    height: 1.65rem;
+    border-radius: 0.65rem;
+    background: #eef2ff;
+  }
+
+  .mobile-page > .mobile-page-heading {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.65rem;
+    margin-bottom: -0.15rem;
+  }
+
+  .mobile-page > .mobile-page-heading h1 {
+    display: none;
+  }
+
+  .mobile-page > .mobile-page-heading p {
+    margin-top: 0;
+    color: #64748b;
+    font-size: 0.8rem;
+    line-height: 1.55;
+  }
+
+  .mobile-page > .mobile-page-heading > button,
+  .mobile-page > .mobile-page-heading > a {
+    align-self: flex-start;
+  }
+
+  .mobile-page-actions {
+    width: 100%;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .mobile-page-actions > button,
+  .mobile-page-actions > a {
+    min-height: 2.6rem;
+    flex: 1 1 auto;
+    justify-content: center;
+  }
+
+  .mobile-main > .space-y-6 > :not(:last-child),
+  .mobile-page.space-y-6 > :not(:last-child) {
+    margin-bottom: 1rem;
+  }
+
+  .mobile-main > .space-y-5 > :not(:last-child),
+  .mobile-page.space-y-5 > :not(:last-child) {
+    margin-bottom: 0.875rem;
+  }
+
+  .mobile-page .p-5,
+  .mobile-modal .p-5 {
+    padding: 1rem;
+  }
+
+  .mobile-page .p-6 {
+    padding: 1.1rem;
+  }
+
+  .mobile-page .rounded-3xl {
+    border-radius: 1.25rem;
+  }
+
+  .mobile-segmented {
+    width: 100%;
+  }
+
+  .mobile-segmented > button {
+    min-width: 0;
+    flex: 1;
+    padding-right: 0.6rem;
+    padding-left: 0.6rem;
+  }
+
+  .mobile-filter-bar {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    width: 100%;
+    gap: 0.55rem !important;
+  }
+
+  .mobile-filter-bar > .mobile-filter-search,
+  .mobile-filter-bar > .mobile-filter-mode {
+    grid-column: 1 / -1;
+    width: 100%;
+  }
+
+  .mobile-filter-bar > select,
+  .mobile-filter-bar > button {
+    width: 100%;
+    min-width: 0;
+    justify-content: center;
+  }
+
+  .mobile-filter-mode > button {
+    min-height: 2.75rem;
+    flex: 1;
+    padding-right: 0.5rem;
+    padding-left: 0.5rem;
+  }
+
+  .mobile-filter-row {
+    align-items: stretch;
+  }
+
+  .mobile-filter-row > div:first-child {
+    display: flex;
+    width: 100%;
+  }
+
+  .mobile-filter-row > div:first-child > button {
+    min-width: 0;
+    flex: 1;
+    padding-right: 0.65rem;
+    padding-left: 0.65rem;
+  }
+
+  .mobile-filter-row > select {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .mobile-task-card {
+    display: grid !important;
+    grid-template-columns: 1.4rem minmax(0, 1fr) auto;
+    align-items: start !important;
+    gap: 0.55rem 0.75rem !important;
+  }
+
+  .mobile-task-content {
+    grid-column: 2 / -1;
+  }
+
+  .mobile-task-due {
+    grid-column: 2;
+    text-align: left;
+  }
+
+  .mobile-task-due > div {
+    display: inline;
+    margin-right: 0.45rem;
+    font-size: 0.75rem;
+  }
+
+  .mobile-task-actions {
+    grid-column: 3;
+    justify-self: end;
+  }
+
+  .mobile-task-actions button {
+    display: flex;
+    width: 2.25rem;
+    height: 2.25rem;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .mobile-forecast-controls {
+    width: 100%;
+    align-items: stretch;
+  }
+
+  .mobile-forecast-controls > div {
+    display: grid;
+    grid-template-columns: auto repeat(3, minmax(0, 1fr));
+    width: 100%;
+  }
+
+  .mobile-forecast-controls > div > button {
+    min-width: 0;
+    padding-right: 0.35rem;
+    padding-left: 0.35rem;
+  }
+
+  .mobile-scroll-hint {
+    display: block;
+    border-bottom: 1px solid #eef2ff;
+    background: #f8faff;
+    padding: 0.55rem 1rem;
+    color: #6366f1;
+    font-size: 0.75rem;
+    text-align: center;
+  }
+
+  .mobile-timetable-scroll {
+    max-height: calc(100dvh - 14rem);
+    padding: 0.75rem;
+    overscroll-behavior: contain;
+    scrollbar-width: thin;
+  }
+
+  .mobile-dashboard .mobile-quick-capture {
+    padding: 1rem;
+  }
+
+  .mobile-dashboard .mobile-quick-capture textarea {
+    min-height: 5.25rem;
+  }
+
+  .mobile-stat-grid > div {
+    min-height: 6.35rem;
+    padding: 0.85rem;
+  }
+
+  .mobile-main table {
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .mobile-main {
+    padding-right: 0.625rem;
+    padding-left: 0.625rem;
+  }
+
+  .mobile-feature-grid {
+    column-gap: 0.25rem;
+  }
+
+  .mobile-page-actions > button,
+  .mobile-page-actions > a {
+    padding-right: 0.65rem;
+    padding-left: 0.65rem;
+  }
+}
+
+/* 高亮检索摘录 */
+mark-hit {
+  background: #fde68a;
+  border-radius: 2px;
+  padding: 0 1px;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+
+/* ===== 动态壁纸 =====
+   WallpaperLayer 固定在视口最底层（z-0），主内容/侧边栏在其上方半透明展示。
+   全部由 CSS 动画实现：零外部资源、离线可用、低功耗（GPU 合成 transform/opacity）。 */
+.wallpaper-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.wpblob {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(70px);
+  will-change: transform, opacity;
+}
+
+@keyframes wp-drift {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(6vmax, 4vmax, 0) scale(1.12);
+  }
+  100% {
+    transform: translate3d(-4vmax, 6vmax, 0) scale(0.94);
+  }
+}
+
+/* 极光：浅色底 + 四团柔光缓缓漂移 */
+.wp-aurora {
+  background: linear-gradient(135deg, #eef2ff 0%, #fdf2f8 55%, #ecfeff 100%);
+}
+.wp-aurora-blob {
+  opacity: 0.5;
+}
+.wp-aurora-blob-0 {
+  width: 55vmax;
+  height: 55vmax;
+  left: -12vmax;
+  top: -14vmax;
+  background: radial-gradient(circle at 30% 30%, #a5b4fc, transparent 60%);
+  animation: wp-drift 26s ease-in-out infinite alternate;
+}
+.wp-aurora-blob-1 {
+  width: 48vmax;
+  height: 48vmax;
+  right: -10vmax;
+  top: 6vmax;
+  background: radial-gradient(circle at 60% 40%, #f9a8d4, transparent 62%);
+  animation: wp-drift 32s ease-in-out infinite alternate-reverse;
+}
+.wp-aurora-blob-2 {
+  width: 50vmax;
+  height: 50vmax;
+  left: 30%;
+  bottom: -16vmax;
+  background: radial-gradient(circle at 50% 50%, #a5f3fc, transparent 60%);
+  animation: wp-drift 38s ease-in-out infinite alternate;
+}
+.wp-aurora-blob-3 {
+  width: 40vmax;
+  height: 40vmax;
+  right: 18%;
+  bottom: 4vmax;
+  background: radial-gradient(circle at 50% 50%, #ddd6fe, transparent 62%);
+  animation: wp-drift 29s ease-in-out infinite alternate-reverse;
+}
+
+/* 流光：三色渐变背景缓慢流动 */
+.wp-gradient {
+  background: linear-gradient(120deg, #e0e7ff, #fbcfe8, #cffafe, #e0e7ff);
+  background-size: 300% 300%;
+  animation: wp-gradient-flow 18s ease infinite;
+}
+@keyframes wp-gradient-flow {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* 星云：柔光光晕缓慢旋转 + 呼吸 */
+.wp-nebula {
+  background: linear-gradient(150deg, #f5f3ff 0%, #f0f9ff 100%);
+}
+.wp-nebula-blob {
+  opacity: 0.5;
+}
+.wp-nebula-blob-0 {
+  width: 60vmax;
+  height: 60vmax;
+  left: -18vmax;
+  top: -20vmax;
+  background: radial-gradient(circle at 40% 40%, #c7d2fe, transparent 62%);
+  animation: wp-spin 60s linear infinite;
+}
+.wp-nebula-blob-1 {
+  width: 52vmax;
+  height: 52vmax;
+  right: -16vmax;
+  bottom: -18vmax;
+  background: radial-gradient(circle at 60% 60%, #fde68a, transparent 60%);
+  animation: wp-spin-rev 70s linear infinite;
+}
+.wp-nebula-blob-2 {
+  width: 40vmax;
+  height: 40vmax;
+  left: 40%;
+  top: 28%;
+  background: radial-gradient(circle at 50% 50%, #a5f3fc, transparent 58%);
+  animation: wp-breathe 14s ease-in-out infinite;
+}
+@keyframes wp-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes wp-spin-rev {
+  to {
+    transform: rotate(-360deg);
+  }
+}
+@keyframes wp-breathe {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.4;
+  }
+  50% {
+    transform: scale(1.15);
+    opacity: 0.6;
+  }
+}
+
+/* 晨雾：轻柔雾团缓缓横向飘动 */
+.wp-mist {
+  background: linear-gradient(180deg, #eef6fb 0%, #f8fafc 100%);
+}
+.wp-mist-blob {
+  opacity: 0.6;
+}
+.wp-mist-blob-0 {
+  width: 46vmax;
+  height: 26vmax;
+  left: -8vmax;
+  top: 12%;
+  background: radial-gradient(ellipse at center, #ffffff, transparent 65%);
+  animation: wp-mist 30s ease-in-out infinite alternate;
+}
+.wp-mist-blob-1 {
+  width: 40vmax;
+  height: 24vmax;
+  right: -10vmax;
+  top: 40%;
+  background: radial-gradient(ellipse at center, #e0f2fe, transparent 65%);
+  animation: wp-mist 38s ease-in-out infinite alternate-reverse;
+}
+.wp-mist-blob-2 {
+  width: 44vmax;
+  height: 26vmax;
+  left: 20%;
+  bottom: -8vmax;
+  background: radial-gradient(ellipse at center, #f1f5f9, transparent 66%);
+  animation: wp-mist 34s ease-in-out infinite alternate;
+}
+@keyframes wp-mist {
+  0% {
+    transform: translateX(-4vmax);
+  }
+  100% {
+    transform: translateX(5vmax);
+  }
+}
+
+/* 粒子：细微圆点从底部缓缓上浮 */
+.wp-particles {
+  background: linear-gradient(180deg, #f8fafc 0%, #eef2ff 100%);
+}
+.wp-particle {
+  position: absolute;
+  bottom: 0;
+  border-radius: 9999px;
+  opacity: 0;
+  animation-name: wp-float;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+@keyframes wp-float {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 0;
+  }
+  8% {
+    opacity: 0.55;
+  }
+  90% {
+    opacity: 0.45;
+  }
+  100% {
+    transform: translateY(-108vh) scale(1.25);
+    opacity: 0;
+  }
+}
+
+/* 自定义图片壁纸：铺满全屏 + 可选 Ken Burns 缓慢缩放平移动效 */
+.wp-custom {
+  background: #eef2ff;
+}
+.wp-custom-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  will-change: transform;
+}
+.wp-custom-img-animated {
+  animation: wp-kenburns 42s ease-in-out infinite alternate;
+}
+@keyframes wp-kenburns {
+  0% {
+    transform: scale(1.02) translate3d(0, 0, 0);
+  }
+  100% {
+    transform: scale(1.14) translate3d(-1.8%, 1.2%, 0);
+  }
+}
+
+/* 无障碍：用户系统开启「减弱动态效果」时关闭壁纸动画 */
+@media (prefers-reduced-motion: reduce) {
+  .wallpaper-layer,
+  .wallpaper-layer * {
+    animation: none !important;
+  }
+}
+
+/* ===== 登录 / 注册页动效 ===== */
+
+/* 卡片入场：上浮 + 淡入 + 轻微缩放 */
+@keyframes auth-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+.auth-enter {
+  animation: auth-fade-up 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.auth-enter-delay-1 {
+  animation: auth-fade-up 0.45s cubic-bezier(0.22, 1, 0.36, 1) 0.08s both;
+}
+.auth-enter-delay-2 {
+  animation: auth-fade-up 0.45s cubic-bezier(0.22, 1, 0.36, 1) 0.16s both;
+}
+
+/* 登录失败：表单抖动提示 */
+@keyframes auth-shake {
+  10%,
+  90% {
+    transform: translateX(-1px);
+  }
+  20%,
+  80% {
+    transform: translateX(2px);
+  }
+  30%,
+  50%,
+  70% {
+    transform: translateX(-3px);
+  }
+  40%,
+  60% {
+    transform: translateX(3px);
+  }
+}
+.auth-shake {
+  animation: auth-shake 0.5s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}
+
+/* 品牌图标：轻盈浮动 */
+@keyframes auth-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+.auth-float {
+  animation: auth-float 5s ease-in-out infinite;
+}
+
+/* 登录页输入框内图标占位（避免布局抖动） */
+.auth-input-icon {
+  position: absolute;
+  left: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .auth-enter,
+  .auth-enter-delay-1,
+  .auth-enter-delay-2,
+  .auth-shake,
+  .auth-float {
+    animation: none !important;
+  }
+}
+
+/* 同组导航、专注计时和触控操作。 */
+.mobile-related-nav {
+  display: flex;
+  gap: 0.45rem;
+  overflow-x: auto;
+  margin-bottom: 0.9rem;
+  padding: 0.1rem 0 0.25rem;
+  scrollbar-width: none;
+}
+.mobile-related-nav a {
+  display: flex;
+  min-height: 2.75rem;
+  flex: none;
+  align-items: center;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.85rem;
+  padding: 0 0.8rem;
+  background: rgb(255 255 255 / 0.85);
+  color: #64748b;
+  font-size: 0.8rem;
+}
+.mobile-related-nav a.is-active {
+  border-color: #c7d2fe;
+  color: #4f46e5;
+  background: #eef2ff;
+  font-weight: 600;
+}
+.mobile-feature-link.is-current { background: #eef2ff; color: #4f46e5; }
+.mobile-icon-button { min-width: 2.75rem; min-height: 2.75rem; }
+.mobile-task-focus { display: inline-flex; align-items: center; justify-content: center; gap: 0.25rem; }
+.mobile-task-focus span { font-size: 0.75rem; }
+.mobile-focus-layout { align-items: start; grid-template-columns: minmax(0, 1fr); }
+.mobile-focus-layout > * { min-width: 0; }
+.mobile-focus-ring { width: min(100%, 300px); aspect-ratio: 1; }
+.mobile-focus-ring > svg { width: 100%; height: auto; }
+.mobile-focus-modes { width: 100%; }
+.mobile-focus-modes button { flex: 1; min-width: 0; min-height: 2.75rem; padding-inline: 0.5rem; }
+.mobile-focus-cycles { flex-wrap: wrap; }
+.mobile-focus-cycles span:last-child { flex-basis: 100%; margin-left: 0; text-align: center; }
+.mobile-focus button:disabled { cursor: default; opacity: 0.55; }
+.mobile-focus-status {
+  display: flex;
+  min-height: 2.75rem;
+  align-items: center;
+  gap: 0.35rem;
+  border-radius: 0.8rem;
+  padding: 0.3rem 0.6rem;
+  background: #eef2ff;
+  color: #4f46e5;
+  font-size: 0.8rem;
+  font-variant-numeric: tabular-nums;
+}
+.mobile-focus-status small { display: block; font-size: 0.65rem; }
+
+@media (max-width: 767px) {
+  .mobile-focus > .mobile-page-heading { display: none; }
+  .mobile-focus-layout { gap: 1rem; }
+  .mobile-focus-card { padding: 1rem; }
+  .mobile-focus-ring { width: min(100%, 240px); margin-top: 1rem; }
+  .mobile-focus-ring .text-6xl { font-size: clamp(2.75rem, 14vw, 3.75rem); }
+  .mobile-focus-controls { margin-top: 1rem; }
+  .mobile-focus-controls > button { min-width: 2.75rem; min-height: 2.75rem; }
+  .mobile-task-actions { opacity: 1; }
+  .mobile-task-actions > a { min-height: 2.75rem; padding: 0.4rem; }
+  .mobile-task-actions > button { min-width: 2.75rem; min-height: 2.75rem; }
+  .mobile-task-card { grid-template-columns: 1.4rem minmax(0, 1fr); }
+  .mobile-task-due { grid-column: 2; }
+  .mobile-task-actions { grid-column: 2; justify-self: start; }
+  .mobile-focus .grid-cols-2 { gap: 0.65rem; }
+  .mobile-modal-body { padding-bottom: calc(1rem + env(safe-area-inset-bottom)); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .mobile-page, .mobile-sheet { animation: none; }
+}
