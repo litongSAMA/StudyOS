@@ -1,0 +1,26 @@
+﻿StudyOS · Windows 免安装版
+
+适用：Windows 10 / Windows 11，64 位 x64（Intel / AMD）。
+1. 将整个 ZIP 解压到一个目录，再双击 StudyOS.exe。
+2. 程序就绪后自动打开浏览器。无需安装 Python、Node.js 或依赖，也无需管理员权限。
+3. 运行期间保留启动窗口；按 Ctrl+C 或关闭启动窗口可退出。
+4. 请完整保留 _internal 文件夹，不能只拷贝 StudyOS.exe。
+
+数据和日志：
+学习数据：%LOCALAPPDATA%\StudyOS\data
+运行日志：%LOCALAPPDATA%\StudyOS\logs
+更换程序文件夹或升级程序不会覆盖这个数据目录。
+此分发包是干净程序，不包含打包人的个人数据库、上传文件、账号或 API 密钥。
+已有数据请在原程序的“同步/备份”界面导出，再在新程序中恢复。
+联网 AI 功能仍需在界面里配置自己的服务和密钥；离线规则、OCR 和文档解析已包含。
+局域网访问可以用本机局域网 IP 和窗口中显示的端口；浏览器推送受 HTTPS/浏览器限制。
+
+故障诊断：
+双击 运行自检.cmd：在临时目录检查运行库、OCR、PDF/Word/PPT/Excel、数据库和接口，不改学习数据。
+首次运行待在 Windows 实机验收，建议分发前执行一次自检。
+无法启动时保留控制台报错；使用 --no-browser 可关闭自动打开浏览器。
+默认使用端口 8800；端口占用时自动尝试 8801–8899。
+命令行：StudyOS.exe --no-browser --port 8800
+高级：STUDYOS_DATA_DIR 环境变量可指定其他数据目录。
+
+本包针对当前 64 位 Windows，不支持 Windows 7/8 或 32 位系统。
