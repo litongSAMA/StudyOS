@@ -1,6 +1,0 @@
-StudyOS bundles CPython and third-party Python libraries.
-Python license: licenses/PYTHON-LICENSE.txt
-Microsoft runtime: licenses/Microsoft-VC-Runtime/
-Python library licenses are retained in _internal/python/Lib/site-packages/ under each distribution's *.dist-info/licenses directory or LICENSE/COPYING file.
-Full pinned package list: requirements-windows.lock
-OpenCV's headless variant supplies the same image-processing API used by OCR, without a GUI/media runtime requirement.
